@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DifferentialAndIntegralEquationsSolving.Equations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace DifferentialAndIntegralEquationsSolving
         public MainWindow()
         {
             InitializeComponent();
+            Euler euler = new Euler(0, 1, 0.01, 0);
+            euler.Solve();
         }
     }
 }
