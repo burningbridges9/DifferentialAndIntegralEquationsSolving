@@ -63,6 +63,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Equations\Collocation.cs" />
+    <Compile Include="Equations\RungeKutta.cs" />
+    <Compile Include="Equations\ThomasAlgo.cs" />
     <Compile Include="ViewModels\Equations\EulerVM.cs" />
     <Compile Include="ViewModels\MainWindowVM.cs" />
     <Compile Include="ViewModels\PlotViewModel.cs" />

@@ -10,23 +10,23 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
 {
     public abstract class Equation : INotifyPropertyChanged
     {
-        private int x0;
-        public int X0
+        private double x0;
+        public double X0
         {
             get { return x0; }
             set
             {
-                X0 = value;
+                x0 = value;
                 OnPropertyChanged("X0");
             }
         }
-        private int x1;
-        public int X1
+        private double x1;
+        public double X1
         {
             get { return x1; }
             set
             {
-                X1 = value;
+                x1 = value;
                 OnPropertyChanged("X1");
             }
         }
@@ -36,7 +36,7 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
             get { return n; }
             set
             {
-                N = value;
+                n = value;
                 OnPropertyChanged("N");
             }
         }
@@ -46,7 +46,7 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
             get { return h; }
             set
             {
-                H = value;
+                h = value;
                 OnPropertyChanged("H");
             }
         }
@@ -56,7 +56,7 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
             get { return y0; }
             set
             {
-                Y0 = value;
+                y0 = value;
                 OnPropertyChanged("Y0");
             }
         }

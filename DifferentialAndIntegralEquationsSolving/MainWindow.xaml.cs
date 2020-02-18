@@ -24,8 +24,15 @@ namespace DifferentialAndIntegralEquationsSolving
         public MainWindow()
         {
             InitializeComponent();
-            Euler euler = new Euler(0, 1, 0.01, 0);
-            euler.Solve();
+            //Euler euler = new Euler(0, 1, 0.01, 0);
+            //euler.Solve();
+
+            //RungeKutta rungeKutta = new RungeKutta(0.3, 1, 0.01, -3);
+            //rungeKutta.Solve();
+
+
+            ThomasAlgo thomasAlgo = new ThomasAlgo(1, 2, 0.01, 1, 0);
+            thomasAlgo.Solve();
         }
     }
 }

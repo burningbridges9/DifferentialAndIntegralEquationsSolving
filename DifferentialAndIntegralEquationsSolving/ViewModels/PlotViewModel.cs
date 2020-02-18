@@ -70,11 +70,11 @@ namespace DifferentialAndIntegralEquationsSolving.ViewModels
             });
             foreach (var xy in x.Zip(y, Tuple.Create))
             {
-                (model.Series[0] as LineSeries).Points.Add(new DataPoint(xy.Item2 , xy.Item1));
+                (model.Series[0] as LineSeries).Points.Add(new DataPoint(xy.Item2, xy.Item1));
             }
             MyModel = model;
         }
-        
+
         private PlotModel myModel { get; set; }
         public PlotModel MyModel
         {
@@ -86,3 +86,4 @@ namespace DifferentialAndIntegralEquationsSolving.ViewModels
             }
         }
     }
+}
