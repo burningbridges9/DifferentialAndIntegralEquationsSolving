@@ -23,20 +23,20 @@
                 <ColumnDefinition Width="675*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <oxy:PlotView x:Name="Plot" Model ="{Binding Path = PlotViewModel.MyModel, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="0"/>
-            <TabControl Grid.Column="1" Grid.RowSpan="2">
-                <TabItem x:Name="EulerTab" Width="150" Height="50" Header="Euler" FontSize="20">
+            <TabControl x:Name="tabControl" Grid.Column="1" Grid.RowSpan="2">
+                <TabItem x:Name="EulerTab" Width="70" Height="50" Header="Euler" FontSize="15">
                     <Grid>
                         <vs:EulerView x:Name="eulerView" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="RungeKuttaTab" Width="150" Height="50" Header="Runge Kutta" FontSize="20">
+                <TabItem x:Name="RungeKuttaTab" Width="120" Height="50" Header="Runge Kutta" FontSize="15">
                     <Grid>
-                        <!--<pr:QGradientCalc x:Name="QGradientClc" Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="2"/>-->
+                        <vs:RungeKuttaView x:Name="rungeKuttaView" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="ThomasTab" Width="150" Height="50" Header="Thomas" FontSize="20">
+                <TabItem x:Name="ThomasTab" Width="100" Height="50" Header="Thomas algo" FontSize="15">
                     <Grid>
-                        <!--<pr:PGradientCalc x:Name="PGradientClc" Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="2"/>-->
+                        <vs:ThomasAlgoView x:Name="thomasAlgoView" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
             </TabControl>
@@ -49,6 +49,9 @@
                 </Grid.ColumnDefinitions>
                 <Button x:Name="Calculate" Grid.Column ="0" Click="Calculate_Click">
                     <TextBlock Text="Calculate"/>
+                </Button>
+                <Button x:Name="Export" Grid.Column ="1" Click="Export_Click">
+                    <TextBlock Text="Export"/>
                 </Button>
                 <!--<Button x:Name="CalculatePressuresButton" Grid.Column ="0" Command="{Binding CalculatePressures}">
                     <TextBlock Text="Pressures"/>

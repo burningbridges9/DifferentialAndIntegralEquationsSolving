@@ -27,7 +27,7 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
         {
             for (int i = 1; i < X.Length; i++)
             {
-                Y[i] = X[i-1] - Y[i - 1] + 2;
+                Y[i] = Y[i - 1]+ H*(X[i-1] - Y[i - 1] + 2);
             }
         }
     }

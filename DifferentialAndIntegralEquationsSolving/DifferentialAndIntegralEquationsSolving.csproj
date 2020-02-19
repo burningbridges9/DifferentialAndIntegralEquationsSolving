@@ -63,16 +63,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Equations\Collocation.cs" />
-    <Compile Include="Equations\RungeKutta.cs" />
-    <Compile Include="Equations\ThomasAlgo.cs" />
+    <Compile Include="Models\Equations\Collocation.cs" />
+    <Compile Include="Models\Equations\RungeKutta.cs" />
+    <Compile Include="Models\Equations\ThomasAlgo.cs" />
+    <Compile Include="ViewModels\Equations\ThomasAlgoVM.cs" />
+    <Compile Include="ViewModels\Equations\RungeKuttaVM.cs" />
     <Compile Include="ViewModels\Equations\EulerVM.cs" />
     <Compile Include="ViewModels\MainWindowVM.cs" />
     <Compile Include="ViewModels\PlotViewModel.cs" />
-    <Compile Include="Views\EulerView.xaml.cs">
+    <Compile Include="Views\Equations\ThomasAlgoView.xaml.cs">
+      <DependentUpon>ThomasAlgoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Equations\RungeKuttaView.xaml.cs">
+      <DependentUpon>RungeKuttaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Equations\EulerView.xaml.cs">
       <DependentUpon>EulerView.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -80,13 +88,21 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Equations\Euler.cs" />
-    <Compile Include="Equations\Equation.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Models\Equations\Euler.cs" />
+    <Compile Include="Models\Equations\Equation.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\EulerView.xaml">
+    <Page Include="Views\Equations\ThomasAlgoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Equations\RungeKuttaView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Equations\EulerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

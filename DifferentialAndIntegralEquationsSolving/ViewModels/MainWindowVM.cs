@@ -15,9 +15,13 @@ namespace DifferentialAndIntegralEquationsSolving.ViewModels
     {
         public PlotViewModel plotViewModel;
         public EulerVM EulerVM { get; set; }
+        public RungeKuttaVM RungeKuttaVM { get; set; }
+        public ThomasAlgoVM ThomasAlgoVM { get; set; }
         public MainWindowVM()
         {
             EulerVM = EulerView.eulerVM;
+            RungeKuttaVM = RungeKuttaView.RungeKuttaVM;
+            ThomasAlgoVM = ThomasAlgoView.ThomasAlgoVM;
             this.PlotViewModel = new PlotViewModel();
         }
         public PlotViewModel PlotViewModel

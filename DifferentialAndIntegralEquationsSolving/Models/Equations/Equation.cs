@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -86,7 +87,21 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
 
         public void Export()
         {
+            string pathX = Path.Combine(Directory.GetCurrentDirectory(), string.Format("{0}ExportedX.txt", this.GetType().Name)),
+                pathY = Path.Combine(Directory.GetCurrentDirectory(), string.Format("{0}ExportedY.txt", this.GetType().Name));
 
+            using (StreamWriter writerX = new StreamWriter(pathX, false, System.Text.Encoding.Default))
+            using (StreamWriter writerY = new StreamWriter(pathY, false, System.Text.Encoding.Default))
+            {
+                foreach (var x in X)
+                {
+                    writerX.Write(x + " ");
+                }
+                foreach (var y in Y)
+                {
+                    writerY.Write(y + " ");
+                }
+            }
         }
     }
 }
