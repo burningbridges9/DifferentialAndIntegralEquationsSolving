@@ -8,6 +8,11 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
 {
     public class Euler : Equation
     {
+        public Euler()
+        {
+
+        }
+
         public Euler(double x0, double x1, double h, double y0)
         {
             this.X0 = x0;

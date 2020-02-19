@@ -33,7 +33,6 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
             S = new double[N];
             T = new double[N];
             FillMatrixAndVectorForAlgo();
-
         }
 
         public void FillMatrixAndVectorForAlgo()

@@ -1,4 +1,5 @@
 ﻿using DifferentialAndIntegralEquationsSolving.Equations;
+using DifferentialAndIntegralEquationsSolving.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,13 @@ namespace DifferentialAndIntegralEquationsSolving
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainWindowVM MainWindowVM { get; set; }
         public MainWindow()
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
+            MainWindowVM = new MainWindowVM();
+            DataContext = MainWindowVM;
             //Euler euler = new Euler(0, 1, 0.01, 0);
             //euler.Solve();
 
@@ -31,8 +36,14 @@ namespace DifferentialAndIntegralEquationsSolving
             //rungeKutta.Solve();
 
 
-            ThomasAlgo thomasAlgo = new ThomasAlgo(1, 2, 0.01, 1, 0);
-            thomasAlgo.Solve();
+            //ThomasAlgo thomasAlgo = new ThomasAlgo(1, 2, 0.01, 1, 0);
+            //thomasAlgo.Solve();
+        }
+
+        private void Calculate_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindowVM.EulerVM.Euler.Solve();
+            MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.EulerVM.Euler.X, MainWindowVM.EulerVM.Euler.Y);
         }
     }
 }

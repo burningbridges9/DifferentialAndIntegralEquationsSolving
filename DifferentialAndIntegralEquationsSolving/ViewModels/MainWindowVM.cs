@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using DifferentialAndIntegralEquationsSolving.ViewModels.Equations;
+using DifferentialAndIntegralEquationsSolving.Views;
 using OxyPlot;
 
 namespace DifferentialAndIntegralEquationsSolving.ViewModels
@@ -12,6 +14,12 @@ namespace DifferentialAndIntegralEquationsSolving.ViewModels
     public class MainWindowVM : INotifyPropertyChanged
     {
         public PlotViewModel plotViewModel;
+        public EulerVM EulerVM { get; set; }
+        public MainWindowVM()
+        {
+            EulerVM = EulerView.eulerVM;
+            this.PlotViewModel = new PlotViewModel();
+        }
         public PlotViewModel PlotViewModel
         {
             get { return plotViewModel; }

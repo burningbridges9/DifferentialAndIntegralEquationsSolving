@@ -5,8 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DifferentialAndIntegralEquationsSolving"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        xmlns:vs ="clr-namespace:DifferentialAndIntegralEquationsSolving.Views"
+        xmlns:vms ="clr-namespace:DifferentialAndIntegralEquationsSolving.ViewModels"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        Title="MainWindow" Height="550" Width="800">
+    <Window.DataContext>
+        <vms:PlotViewModel/>
+    </Window.DataContext>
+    <Grid x:Name="MainGrid">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="400"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="518*"></ColumnDefinition>
+                <ColumnDefinition Width="675*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <oxy:PlotView x:Name="Plot" Model ="{Binding Path = PlotViewModel.MyModel, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="0"/>
+            <TabControl Grid.Column="1" Grid.RowSpan="2">
+                <TabItem x:Name="EulerTab" Width="150" Height="50" Header="Euler" FontSize="20">
+                    <Grid>
+                        <vs:EulerView x:Name="eulerView" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="RungeKuttaTab" Width="150" Height="50" Header="Runge Kutta" FontSize="20">
+                    <Grid>
+                        <!--<pr:QGradientCalc x:Name="QGradientClc" Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="2"/>-->
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="ThomasTab" Width="150" Height="50" Header="Thomas" FontSize="20">
+                    <Grid>
+                        <!--<pr:PGradientCalc x:Name="PGradientClc" Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="2"/>-->
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <Grid x:Name="ButtonsGrid" Grid.Column="0" Grid.Row="2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="Calculate" Grid.Column ="0" Click="Calculate_Click">
+                    <TextBlock Text="Calculate"/>
+                </Button>
+                <!--<Button x:Name="CalculatePressuresButton" Grid.Column ="0" Command="{Binding CalculatePressures}">
+                    <TextBlock Text="Pressures"/>
+                </Button>-->
+                <!--<Button x:Name="ClearButton" Grid.Column ="1"  Command="{Binding Clear}">
+                    <TextBlock Text="Clear"/>
+                </Button>
+                <Button x:Name="CalculateConsumptionsButton"  Grid.Column ="2" Command="{Binding CalculateConsumptions}">
+                    <TextBlock Text="Consumptions"/>
+                </Button>-->
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

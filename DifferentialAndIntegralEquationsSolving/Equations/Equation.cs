@@ -10,6 +10,10 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
 {
     public abstract class Equation : INotifyPropertyChanged
     {
+        public Equation()
+        {
+
+        }
         private double x0;
         public double X0
         {
@@ -78,6 +82,11 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
             {
                 X[i] = X0 + i * H;
             }
+        }
+
+        public void Export()
+        {
+
         }
     }
 }

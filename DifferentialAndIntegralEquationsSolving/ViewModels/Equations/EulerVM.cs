@@ -18,6 +18,11 @@ namespace DifferentialAndIntegralEquationsSolving.ViewModels.Equations
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
+        public EulerVM()
+        {
+            //this.Euler = new Euler();
+        }
+
         private Euler euler;
         public Euler Euler
         {
