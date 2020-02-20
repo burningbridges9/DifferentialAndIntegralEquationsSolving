@@ -75,5 +75,35 @@ namespace DifferentialAndIntegralEquationsSolving
                 MainWindowVM.ThomasAlgoVM.ThomasAlgo.Export();
             }
         }
+
+        private void MatlabSolve_Click(object sender, RoutedEventArgs e)
+        {
+            if ((tabControl.SelectedContent as Grid).Children.OfType<EulerView>().FirstOrDefault() != null)
+            {
+                var x0 = MainWindowVM.EulerVM.Euler.X0;
+                var x1 = MainWindowVM.EulerVM.Euler.X1;
+                var h = MainWindowVM.EulerVM.Euler.H;
+                var y0 = MainWindowVM.EulerVM.Euler.Y0;
+                MainWindowVM.EulerSolverVM.EulerSolver.Execute("Euler", x0, x1, h, y0);
+
+                MainWindowVM.PlotViewModel.PlotXYXY(MainWindowVM.EulerVM.Euler.X, MainWindowVM.EulerVM.Euler.Y,
+                    MainWindowVM.EulerSolverVM.EulerSolver.X, MainWindowVM.EulerSolverVM.EulerSolver.Y);
+            }
+            else if ((tabControl.SelectedContent as Grid).Children.OfType<RungeKuttaView>().FirstOrDefault() != null)
+            {
+                var x0 = MainWindowVM.RungeKuttaVM.RungeKutta.X0;
+                var x1 = MainWindowVM.RungeKuttaVM.RungeKutta.X1;
+                var h = MainWindowVM.RungeKuttaVM.RungeKutta.H;
+                var y0 = MainWindowVM.RungeKuttaVM.RungeKutta.Y0;
+                MainWindowVM.RungeKuttaSolverVM.RungeKuttaSolver.Execute("RungeKutta", x0, x1, h, y0);
+
+                MainWindowVM.PlotViewModel.PlotXYXY(MainWindowVM.RungeKuttaVM.RungeKutta.X, MainWindowVM.RungeKuttaVM.RungeKutta.Y,
+                    MainWindowVM.RungeKuttaSolverVM.RungeKuttaSolver.X, MainWindowVM.RungeKuttaSolverVM.RungeKuttaSolver.Y);
+            }
+            //else if ((tabControl.SelectedContent as Grid).Children.OfType<ThomasAlgoView>().FirstOrDefault() != null)
+            //{
+            //    MainWindowVM.ThomasAlgoVM.ThomasAlgo.Export();
+            //}
+        }
     }
 }

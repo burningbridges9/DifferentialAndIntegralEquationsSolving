@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using DifferentialAndIntegralEquationsSolving.ViewModels.Equations;
+using DifferentialAndIntegralEquationsSolving.ViewModels.MatlabSolvers;
 using DifferentialAndIntegralEquationsSolving.Views;
 using OxyPlot;
 
@@ -17,12 +18,16 @@ namespace DifferentialAndIntegralEquationsSolving.ViewModels
         public EulerVM EulerVM { get; set; }
         public RungeKuttaVM RungeKuttaVM { get; set; }
         public ThomasAlgoVM ThomasAlgoVM { get; set; }
+        public EulerSolverVM EulerSolverVM { get; set; }
+        public RungeKuttaSolverVM RungeKuttaSolverVM { get; set; }
         public MainWindowVM()
         {
             EulerVM = EulerView.eulerVM;
             RungeKuttaVM = RungeKuttaView.RungeKuttaVM;
             ThomasAlgoVM = ThomasAlgoView.ThomasAlgoVM;
-            this.PlotViewModel = new PlotViewModel();
+            RungeKuttaSolverVM = new RungeKuttaSolverVM();
+            EulerSolverVM = new EulerSolverVM();
+            PlotViewModel = new PlotViewModel();
         }
         public PlotViewModel PlotViewModel
         {

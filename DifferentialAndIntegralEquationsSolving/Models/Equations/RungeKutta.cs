@@ -21,7 +21,7 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
 
         private double K(double y)
         {
-            var val = Math.Pow(y, 2) + 2;
+            var val = 4*Math.Pow(y, 2) +2;
             return val;
         }
         public override void Solve()

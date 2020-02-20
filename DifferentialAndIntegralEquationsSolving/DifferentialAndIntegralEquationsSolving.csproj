@@ -63,6 +63,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MatlabSolvers\EulerSolver.cs" />
+    <Compile Include="MatlabSolvers\MatlabSolver.cs" />
+    <Compile Include="MatlabSolvers\RungeKuttaSolver.cs" />
     <Compile Include="Models\Equations\Collocation.cs" />
     <Compile Include="Models\Equations\RungeKutta.cs" />
     <Compile Include="Models\Equations\ThomasAlgo.cs" />
@@ -70,6 +73,8 @@
     <Compile Include="ViewModels\Equations\RungeKuttaVM.cs" />
     <Compile Include="ViewModels\Equations\EulerVM.cs" />
     <Compile Include="ViewModels\MainWindowVM.cs" />
+    <Compile Include="ViewModels\MatlabSolvers\EulerSolverVM.cs" />
+    <Compile Include="ViewModels\MatlabSolvers\RungeKuttaSolverVM.cs" />
     <Compile Include="ViewModels\PlotViewModel.cs" />
     <Compile Include="Views\Equations\ThomasAlgoView.xaml.cs">
       <DependentUpon>ThomasAlgoView.xaml</DependentUpon>
@@ -134,6 +139,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="MLApp">
+      <Guid>{C36E46AB-6A81-457B-9F91-A7719A06287F}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

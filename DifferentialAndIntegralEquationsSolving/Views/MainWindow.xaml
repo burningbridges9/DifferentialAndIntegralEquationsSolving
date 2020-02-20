@@ -53,6 +53,9 @@
                 <Button x:Name="Export" Grid.Column ="1" Click="Export_Click">
                     <TextBlock Text="Export"/>
                 </Button>
+                <Button x:Name="MatlabSolve" Grid.Column ="2" Click="MatlabSolve_Click">
+                    <TextBlock Text="Matlab Solve"/>
+                </Button>
                 <!--<Button x:Name="CalculatePressuresButton" Grid.Column ="0" Command="{Binding CalculatePressures}">
                     <TextBlock Text="Pressures"/>
                 </Button>-->

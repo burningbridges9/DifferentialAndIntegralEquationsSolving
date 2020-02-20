@@ -75,6 +75,35 @@ namespace DifferentialAndIntegralEquationsSolving.ViewModels
             MyModel = model;
         }
 
+        public void PlotXYXY(double[] x1, double[] y1, double[] x2, double[] y2)
+        {
+            MyModel.Series.Clear();
+            MyModel.InvalidatePlot(true);
+            var model = new PlotModel { LegendSymbolLength = 24 };
+            model.Series.Add(new LineSeries
+            {
+                Color = OxyColors.DarkBlue,
+                MarkerType = MarkerType.Plus,
+                MarkerStrokeThickness = 0.75                
+            });
+            foreach (var xy in x1.Zip(y1, Tuple.Create))
+            {
+                (model.Series[0] as LineSeries).Points.Add(new DataPoint(xy.Item1, xy.Item2));
+            }
+
+            model.Series.Add(new LineSeries
+            {
+                Color = OxyColors.Red,
+                MarkerType = MarkerType.Cross,
+                MarkerStrokeThickness = 0.5
+            });
+            foreach (var xy in x2.Zip(y2, Tuple.Create))
+            {
+                (model.Series[1] as LineSeries).Points.Add(new DataPoint(xy.Item1, xy.Item2));
+            }
+            MyModel = model;
+        }
+
         private PlotModel myModel { get; set; }
         public PlotModel MyModel
         {
