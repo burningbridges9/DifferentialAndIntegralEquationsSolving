@@ -46,6 +46,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="Calculate" Grid.Column ="0" Click="Calculate_Click">
                     <TextBlock Text="Calculate"/>
@@ -55,6 +56,12 @@
                 </Button>
                 <Button x:Name="MatlabSolve" Grid.Column ="2" Click="MatlabSolve_Click">
                     <TextBlock Text="Matlab Solve"/>
+                </Button>
+                <Button x:Name="Diff" Grid.Column ="3" Click="Diff_Click">
+                    <TextBlock Text="Matlab Solve"/>
+                </Button>
+                <Button x:Name="Colloc" Grid.Column ="3" Click="Colloc_Click">
+                    <TextBlock Text="Collocation Solve"/>
                 </Button>
                 <!--<Button x:Name="CalculatePressuresButton" Grid.Column ="0" Command="{Binding CalculatePressures}">
                     <TextBlock Text="Pressures"/>

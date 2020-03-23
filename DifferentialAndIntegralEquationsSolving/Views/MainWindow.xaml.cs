@@ -105,5 +105,21 @@ namespace DifferentialAndIntegralEquationsSolving
             //    MainWindowVM.ThomasAlgoVM.ThomasAlgo.Export();
             //}
         }
+
+        private void Diff_Click(object sender, RoutedEventArgs e)
+        {
+            var diffY = new double[MainWindowVM.RungeKuttaVM.RungeKutta.Y.Length];
+            for (int i = 0; i < MainWindowVM.RungeKuttaVM.RungeKutta.Y.Length; i++)
+            {
+                diffY[i] = Math.Abs(MainWindowVM.RungeKuttaVM.RungeKutta.Y[i] - MainWindowVM.RungeKuttaSolverVM.RungeKuttaSolver.Y[i]);
+            }
+            MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.RungeKuttaVM.RungeKutta.X, diffY);
+        }
+
+        private void Colloc_Click(object sender, RoutedEventArgs e)
+        {
+            Collocation collocation = new Collocation();
+            collocation.Solve();
+        }
     }
 }
