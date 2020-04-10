@@ -21,7 +21,7 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
 
         private double K(double y)
         {
-            var val = 4*Math.Pow(y, 2) +2;
+            var val = 4 * Math.Pow(y, 2) + 2;
             return val;
         }
         public override void Solve()
@@ -32,7 +32,7 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
                 var k2 = K(Y[i - 1] + H * k1 / 2.0);
                 var k3 = K(Y[i - 1] + H * k2 / 2.0);
                 var k4 = K(Y[i - 1] + H * k3);
-                Y[i] = Y[i - 1] + H / 6.0 * (k1 + 2 * k2 + 2 * k3 + k4);
+                Y[i] = Y[i - 1] + (H / 6.0) * (k1 + 2 * k2 + 2 * k3 + k4);
             }
         }
     }

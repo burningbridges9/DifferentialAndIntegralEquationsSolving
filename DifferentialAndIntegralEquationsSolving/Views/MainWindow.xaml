@@ -39,6 +39,11 @@
                         <vs:ThomasAlgoView x:Name="thomasAlgoView" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
+                <TabItem x:Name="CollocTab" Width="100" Height="50" Header="Collocation" FontSize="15">
+                    <Grid>
+                        <vs:CollocationView x:Name="collocView" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
             </TabControl>
             <Grid x:Name="ButtonsGrid" Grid.Column="0" Grid.Row="2" >
                 <Grid.ColumnDefinitions>
@@ -60,9 +65,12 @@
                 <Button x:Name="Diff" Grid.Column ="3" Click="Diff_Click">
                     <TextBlock Text="Matlab Solve"/>
                 </Button>
-                <Button x:Name="Colloc" Grid.Column ="3" Click="Colloc_Click">
-                    <TextBlock Text="Collocation Solve"/>
+                <Button x:Name="DiffIntegr" Grid.Column ="4" Click="DiffIntegr_Click">
+                    <TextBlock Text="Integral eq diffs"/>
                 </Button>
+                <!--<Button x:Name="Colloc" Grid.Column ="3" Click="Colloc_Click">
+                    <TextBlock Text="Collocation Solve"/>
+                </Button>-->
                 <!--<Button x:Name="CalculatePressuresButton" Grid.Column ="0" Command="{Binding CalculatePressures}">
                     <TextBlock Text="Pressures"/>
                 </Button>-->

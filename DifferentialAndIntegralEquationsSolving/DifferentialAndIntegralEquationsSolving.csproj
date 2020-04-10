@@ -69,6 +69,7 @@
     <Compile Include="Models\Equations\Collocation.cs" />
     <Compile Include="Models\Equations\RungeKutta.cs" />
     <Compile Include="Models\Equations\ThomasAlgo.cs" />
+    <Compile Include="ViewModels\Equations\CollocationVM.cs" />
     <Compile Include="ViewModels\Equations\ThomasAlgoVM.cs" />
     <Compile Include="ViewModels\Equations\RungeKuttaVM.cs" />
     <Compile Include="ViewModels\Equations\EulerVM.cs" />
@@ -76,6 +77,9 @@
     <Compile Include="ViewModels\MatlabSolvers\EulerSolverVM.cs" />
     <Compile Include="ViewModels\MatlabSolvers\RungeKuttaSolverVM.cs" />
     <Compile Include="ViewModels\PlotViewModel.cs" />
+    <Compile Include="Views\Equations\CollocationView.xaml.cs">
+      <DependentUpon>CollocationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Equations\ThomasAlgoView.xaml.cs">
       <DependentUpon>ThomasAlgoView.xaml</DependentUpon>
     </Compile>
@@ -85,6 +89,10 @@
     <Compile Include="Views\Equations\EulerView.xaml.cs">
       <DependentUpon>EulerView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Equations\CollocationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

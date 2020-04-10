@@ -65,8 +65,8 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
                 OnPropertyChanged("Y0");
             }
         }
-        public double []X { get; set; }
-        public double []Y { get; set; }
+        public double[] X { get; set; }
+        public double[] Y { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
@@ -75,11 +75,11 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
         }
 
         public abstract void Solve();
-        protected void SetupX()
+        protected virtual void SetupX()
         {
-            this.N = (int)((X1 - X0)/H);
+            this.N = (int)((X1 - X0) / H);
             X = new double[N];
-            for (int i =0; i<N;i++)
+            for (int i = 0; i < N; i++)
             {
                 X[i] = X0 + i * H;
             }

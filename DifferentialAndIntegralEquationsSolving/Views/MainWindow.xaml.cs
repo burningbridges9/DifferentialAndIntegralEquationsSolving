@@ -58,6 +58,11 @@ namespace DifferentialAndIntegralEquationsSolving
                 MainWindowVM.ThomasAlgoVM.ThomasAlgo.Solve();
                 MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.ThomasAlgoVM.ThomasAlgo.X, MainWindowVM.ThomasAlgoVM.ThomasAlgo.Y);
             }
+            else if ((tabControl.SelectedContent as Grid).Children.OfType<CollocationView>().FirstOrDefault() != null)
+            {
+                MainWindowVM.CollocationVM.Collocation.Solve();
+                MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.CollocationVM.Collocation.X, MainWindowVM.CollocationVM.Collocation.Y);
+            }
         }
 
         private void Export_Click(object sender, RoutedEventArgs e)
@@ -120,6 +125,15 @@ namespace DifferentialAndIntegralEquationsSolving
         {
             Collocation collocation = new Collocation();
             collocation.Solve();
+        }
+
+        private void DiffIntegr_Click(object sender, RoutedEventArgs e)
+        {
+            if ((tabControl.SelectedContent as Grid).Children.OfType<CollocationView>().FirstOrDefault() != null)
+            {
+                MainWindowVM.CollocationVM.Collocation.Tolerance();
+                MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.CollocationVM.Collocation.X, MainWindowVM.CollocationVM.Collocation.Diff);
+            }
         }
     }
 }
