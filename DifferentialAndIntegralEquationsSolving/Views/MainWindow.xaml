@@ -8,14 +8,14 @@
         xmlns:vs ="clr-namespace:DifferentialAndIntegralEquationsSolving.Views"
         xmlns:vms ="clr-namespace:DifferentialAndIntegralEquationsSolving.ViewModels"
         xmlns:oxy="http://oxyplot.org/wpf"
-        Title="MainWindow" Height="550" Width="800">
+        Title="MainWindow" Height="800" Width="1000">
     <Window.DataContext>
         <vms:PlotViewModel/>
     </Window.DataContext>
     <Grid x:Name="MainGrid">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="400"/>
+                <RowDefinition Height="700"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -47,6 +47,11 @@
                 <TabItem x:Name="GalerTab" Width="100" Height="50" Header="Galerkin" FontSize="15">
                     <Grid>
                         <vs:GalerkinView x:Name="galerView" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="RegGalerTab" Width="100" Height="50" Header="Tikhonov regulariztion" FontSize="15">
+                    <Grid>
+                        <vs:TikhonovRegularizationGalerkinView x:Name="regView" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
             </TabControl>

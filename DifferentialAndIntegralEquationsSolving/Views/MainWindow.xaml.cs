@@ -68,6 +68,12 @@ namespace DifferentialAndIntegralEquationsSolving
                 MainWindowVM.GalerkinVM.Galerkin.Solve();
                 MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.GalerkinVM.Galerkin.X, MainWindowVM.GalerkinVM.Galerkin.Y);
             }
+            else if ((tabControl.SelectedContent as Grid).Children.OfType<TikhonovRegularizationGalerkinView>().FirstOrDefault() != null)
+            {
+                MainWindowVM.TikhonovRegularizationGalerkinVM.TikhonovRegularizationGalerkin.Solve();
+                MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.TikhonovRegularizationGalerkinVM.TikhonovRegularizationGalerkin.X, 
+                    MainWindowVM.TikhonovRegularizationGalerkinVM.TikhonovRegularizationGalerkin.Y);
+            }
         }
 
         private void Export_Click(object sender, RoutedEventArgs e)
