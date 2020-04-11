@@ -44,6 +44,11 @@
                         <vs:CollocationView x:Name="collocView" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
+                <TabItem x:Name="GalerTab" Width="100" Height="50" Header="Galerkin" FontSize="15">
+                    <Grid>
+                        <vs:GalerkinView x:Name="galerView" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
             </TabControl>
             <Grid x:Name="ButtonsGrid" Grid.Column="0" Grid.Row="2" >
                 <Grid.ColumnDefinitions>

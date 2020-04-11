@@ -63,6 +63,11 @@ namespace DifferentialAndIntegralEquationsSolving
                 MainWindowVM.CollocationVM.Collocation.Solve();
                 MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.CollocationVM.Collocation.X, MainWindowVM.CollocationVM.Collocation.Y);
             }
+            else if ((tabControl.SelectedContent as Grid).Children.OfType<GalerkinView>().FirstOrDefault() != null)
+            {
+                MainWindowVM.GalerkinVM.Galerkin.Solve();
+                MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.GalerkinVM.Galerkin.X, MainWindowVM.GalerkinVM.Galerkin.Y);
+            }
         }
 
         private void Export_Click(object sender, RoutedEventArgs e)
@@ -120,12 +125,7 @@ namespace DifferentialAndIntegralEquationsSolving
             }
             MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.RungeKuttaVM.RungeKutta.X, diffY);
         }
-
-        private void Colloc_Click(object sender, RoutedEventArgs e)
-        {
-            Collocation collocation = new Collocation();
-            collocation.Solve();
-        }
+        
 
         private void DiffIntegr_Click(object sender, RoutedEventArgs e)
         {
@@ -133,6 +133,11 @@ namespace DifferentialAndIntegralEquationsSolving
             {
                 MainWindowVM.CollocationVM.Collocation.Tolerance();
                 MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.CollocationVM.Collocation.X, MainWindowVM.CollocationVM.Collocation.Diff);
+            }
+            else if ((tabControl.SelectedContent as Grid).Children.OfType<GalerkinView>().FirstOrDefault() != null)
+            {
+                MainWindowVM.GalerkinVM.Galerkin.Tolerance();
+                MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.GalerkinVM.Galerkin.X, MainWindowVM.GalerkinVM.Galerkin.Diff);
             }
         }
     }

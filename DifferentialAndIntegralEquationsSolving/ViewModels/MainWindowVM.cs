@@ -19,6 +19,7 @@ namespace DifferentialAndIntegralEquationsSolving.ViewModels
         public RungeKuttaVM RungeKuttaVM { get; set; }
         public ThomasAlgoVM ThomasAlgoVM { get; set; }
         public CollocationVM CollocationVM { get; set; }
+        public GalerkinVM GalerkinVM { get; set; }
         public EulerSolverVM EulerSolverVM { get; set; }
         public RungeKuttaSolverVM RungeKuttaSolverVM { get; set; }
         public MainWindowVM()
@@ -27,6 +28,7 @@ namespace DifferentialAndIntegralEquationsSolving.ViewModels
             RungeKuttaVM = RungeKuttaView.RungeKuttaVM;
             ThomasAlgoVM = ThomasAlgoView.ThomasAlgoVM;
             CollocationVM = CollocationView.CollocationVM;
+            GalerkinVM = GalerkinView.GalerkinVM;
             //RungeKuttaSolverVM = new RungeKuttaSolverVM();
             // EulerSolverVM = new EulerSolverVM();
             PlotViewModel = new PlotViewModel();
