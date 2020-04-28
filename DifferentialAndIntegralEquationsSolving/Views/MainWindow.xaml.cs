@@ -65,8 +65,16 @@ namespace DifferentialAndIntegralEquationsSolving
             }
             else if ((tabControl.SelectedContent as Grid).Children.OfType<GalerkinView>().FirstOrDefault() != null)
             {
-                MainWindowVM.GalerkinVM.Galerkin.Solve();
-                MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.GalerkinVM.Galerkin.X, MainWindowVM.GalerkinVM.Galerkin.Y);
+                if ((bool)(tabControl.SelectedContent as Grid).Children.OfType<GalerkinView>().FirstOrDefault().SolveType.IsChecked)
+                {
+                    MainWindowVM.GalerkinVM.Galerkin.Solve();
+                    MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.GalerkinVM.Galerkin.X, MainWindowVM.GalerkinVM.Galerkin.Y);
+                }
+                else
+                {
+                    MainWindowVM.GalerkinVM.GalerkinFollowup.Solve();
+                    MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.GalerkinVM.GalerkinFollowup.X, MainWindowVM.GalerkinVM.GalerkinFollowup.Y);
+                }
             }
             else if ((tabControl.SelectedContent as Grid).Children.OfType<TikhonovRegularizationGalerkinView>().FirstOrDefault() != null)
             {
@@ -142,8 +150,21 @@ namespace DifferentialAndIntegralEquationsSolving
             }
             else if ((tabControl.SelectedContent as Grid).Children.OfType<GalerkinView>().FirstOrDefault() != null)
             {
-                MainWindowVM.GalerkinVM.Galerkin.Tolerance();
-                MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.GalerkinVM.Galerkin.X, MainWindowVM.GalerkinVM.Galerkin.Diff);
+                if ((bool)(tabControl.SelectedContent as Grid).Children.OfType<GalerkinView>().FirstOrDefault().SolveType.IsChecked)
+                {
+                    MainWindowVM.GalerkinVM.Galerkin.Tolerance();
+                    MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.GalerkinVM.Galerkin.X, MainWindowVM.GalerkinVM.Galerkin.Diff);
+                }
+                else
+                {
+                    MainWindowVM.GalerkinVM.GalerkinFollowup.Tolerance();
+                    MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.GalerkinVM.GalerkinFollowup.X, MainWindowVM.GalerkinVM.GalerkinFollowup.Diff);
+                }
+            }
+            else if ((tabControl.SelectedContent as Grid).Children.OfType<TikhonovRegularizationGalerkinView>().FirstOrDefault() != null)
+            {
+                MainWindowVM.TikhonovRegularizationGalerkinVM.TikhonovRegularizationGalerkin.Tolerance();
+                MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.TikhonovRegularizationGalerkinVM.TikhonovRegularizationGalerkin.X, MainWindowVM.TikhonovRegularizationGalerkinVM.TikhonovRegularizationGalerkin.Diff);
             }
         }
     }

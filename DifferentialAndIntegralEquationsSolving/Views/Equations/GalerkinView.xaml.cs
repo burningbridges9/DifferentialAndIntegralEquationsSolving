@@ -33,6 +33,7 @@ namespace DifferentialAndIntegralEquationsSolving.Views
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             GalerkinVM.Galerkin = new Galerkin();
+            GalerkinVM.GalerkinFollowup = new GalerkinFollowup();
         }
     }
 }

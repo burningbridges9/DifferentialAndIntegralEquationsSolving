@@ -20,6 +20,9 @@
                 <ColumnDefinition Width="79*"></ColumnDefinition>
                 <ColumnDefinition Width="106*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <CheckBox x:Name="SolveType" Grid.Row="1" Grid.Column="1" >
+                <TextBox Text="Gauss-Hermite"/>
+            </CheckBox>
             <Button x:Name="Add" Grid.Column="1" Grid.Row="4" Click="Add_Click" >
                 <TextBlock Text="Add"></TextBlock>
             </Button>

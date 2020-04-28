@@ -67,6 +67,7 @@
     <Compile Include="MatlabSolvers\MatlabSolver.cs" />
     <Compile Include="MatlabSolvers\RungeKuttaSolver.cs" />
     <Compile Include="Models\Equations\Collocation.cs" />
+    <Compile Include="Models\Equations\GalerkinFollowup.cs" />
     <Compile Include="Models\Equations\Galerkin.cs" />
     <Compile Include="Models\Equations\RungeKutta.cs" />
     <Compile Include="Models\Equations\ThomasAlgo.cs" />

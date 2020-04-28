@@ -34,5 +34,16 @@ namespace DifferentialAndIntegralEquationsSolving.ViewModels.Equations
                 OnPropertyChanged("Galerkin");
             }
         }
+
+        private GalerkinFollowup galerkinFollowup;
+        public GalerkinFollowup GalerkinFollowup
+        {
+            get { return galerkinFollowup; }
+            set
+            {
+                galerkinFollowup = value;
+                OnPropertyChanged("GalerkinFollowup");
+            }
+        }
     }
 }

@@ -8,7 +8,8 @@
         xmlns:vs ="clr-namespace:DifferentialAndIntegralEquationsSolving.Views"
         xmlns:vms ="clr-namespace:DifferentialAndIntegralEquationsSolving.ViewModels"
         xmlns:oxy="http://oxyplot.org/wpf"
-        Title="MainWindow" Height="800" Width="1000">
+        Title="MainWindow" Height="800" Width="1000"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.DataContext>
         <vms:PlotViewModel/>
     </Window.DataContext>
