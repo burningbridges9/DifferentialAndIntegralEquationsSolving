@@ -11,24 +11,25 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
     {
         public double[,] C { get; set; }
         public double[] B { get; set; }
-
-        public double[] Diff { get; set; }
-
+        public double[] A { get; set; }
+        public double[] Xroots { get; set; }
+        public int Nroots { get; set; } = 10;
         public double[] WeightsE { get; set; }
         public Galerkin()
         {
-            X0 = -1.0;
-            X1 = 1.0;
-            N = 10;
-            C = new double[N, N];
-            WeightsE = new double[N];
+            X0 = -5.0;
+            X1 = 5.0;
+            N = 20;
+            
+            C = new double[Nroots, Nroots];
+            WeightsE = new double[Nroots];
             SetupX();
-            B = new double[N];
+            B = new double[Nroots];
         }
 
         private void FillB()
         {
-            for (int i = 0; i < X.Length; i++)
+            for (int i = 0; i < Nroots; i++)
             {
                 B[i] = FindB(i);
             }
@@ -37,16 +38,22 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         protected override void SetupX()
         {
             X = new double[N];
-            X[0] = -3.436159118837738;
-            X[1] = -2.532731674232790;
-            X[2] = -1.756683649299882;
-            X[3] = -1.036610829789514;
-            X[4] = -0.342901327223705;
-            X[5] = 0.342901327223705;
-            X[6] = 1.036610829789514;
-            X[7] = 1.756683649299882;
-            X[8] = 2.532731674232790;
-            X[9] = 3.436159118837738;
+            H = (X1 - X0) / (N-1);
+            for (int i = 0; i < N; i++)
+            {
+                X[i] = X0 + i * H;
+            }
+            Xroots = new double[Nroots];
+            Xroots[0] = -3.436159118837738;
+            Xroots[1] = -2.532731674232790;
+            Xroots[2] = -1.756683649299882;
+            Xroots[3] = -1.036610829789514;
+            Xroots[4] = -0.342901327223705;
+            Xroots[5] = 0.342901327223705;
+            Xroots[6] = 1.036610829789514;
+            Xroots[7] = 1.756683649299882;
+            Xroots[8] = 2.532731674232790;
+            Xroots[9] = 3.436159118837738;
 
             WeightsE[0] = 1.0254516913657;
             WeightsE[1] = 0.8206661264048;
@@ -67,15 +74,15 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         {
             FillMatrix();
             FillB();
-            var A = new double[N];
-            A = Gauss(C, B);
+            A = new double[Xroots.Length];
+            A = Gauss(C, B, Nroots);
             Y = new double[N];
             for (int i = 0; i < N; i++)
             {
                 var sum = 0.0;
-                for (int j = 0; j < N; j++)
+                for (int j = 0; j < Nroots; j++)
                 {
-                    sum += A[j] * Hermit(X[i], j);
+                    sum += A[j] * Hermite(X[i], j);
                 }
                 Y[i] += sum;
             }
@@ -83,9 +90,9 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
 
         private void FillMatrix()
         {
-            for (int i = 0; i < X.Length; i++)
+            for (int i = 0; i < Nroots; i++)
             {
-                for (int j = 0; j < X.Length; j++)
+                for (int j = 0; j < Nroots; j++)
                 {
                     C[i, j] = FindC(i, j);
                 }
@@ -105,11 +112,17 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         public double IntegrateForCheck(double xj)
         {
             var sum = 0.0;
-            for (int i = 0; i < X.Length; i++)
+            for (int i = 0; i < Nroots; i++)
             {
+                var yi = 0.0;
+                for (int j = 0; j < Nroots; j++)
+                {
+                    yi += A[j] * Hermite(Xroots[i], j);
+                }
                 var wi = WeightsE[i];
-                var f = K(xj, X[i]) * Y[i];
+                var f = K(xj, Xroots[i]) * yi;
                 sum += wi * f;
+
             }
             return sum;
         }
@@ -119,7 +132,7 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
             Diff = new double[N];
             for (int j = 0; j < X.Length; j++)
             {
-                Diff[j] = Math.Abs(Y[j] - IntegrateForCheck(X[j]) - B[j]);
+                Diff[j] = Math.Abs(Y[j] - IntegrateForCheck(X[j]) - F(X[j]));
             }
         }
 
@@ -134,7 +147,7 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         {
             //n = 10;
             var t = Math.Pow(2, n - 1) * Factorial(n) * Math.Sqrt(Math.PI);
-            var b = Math.Pow(n,2) * Math.Pow(Hermit(xi, n - 1), 2);
+            var b = Math.Pow(n,2) * Math.Pow(Hermite(xi, n - 1), 2);
             var wi = t / b;
             return wi;
         }
@@ -142,11 +155,11 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         public double FirstC(int i, int j)
         {
             var sum = 0.0;
-            for (int k = 0; k < X.Length; k++)
+            for (int k = 0; k < Nroots; k++)
             {
                 var wi = WeightsE[k];
-                var h1 = Hermit(X[k], i);
-                var h2 = Hermit(X[k], j);
+                var h1 = Hermite(Xroots[k], i);
+                var h2 = Hermite(Xroots[k], j);
                 var f = h1 * h2;
                 sum += wi * f;
             }
@@ -156,15 +169,15 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         public double SecondC(int i, int j)
         {
             var sumOutter = 0.0;
-            for (int n = 0; n < X.Length; n++)
+            for (int n = 0; n < Nroots; n++)
             {
-                var h1 = Hermit(X[n], i);
+                var h1 = Hermite(Xroots[n], i);
                 var wi = WeightsE[n];
                 var sumInner = 0.0;
-                for (int m = 0; m < X.Length; m++)
+                for (int m = 0; m < Nroots; m++)
                 {
-                    var k = K(X[n], X[m]);
-                    var h2 = Hermit(X[m], j);
+                    var k = K(Xroots[n], Xroots[m]);
+                    var h2 = Hermite(Xroots[m], j);
                     var fInner = k * h2;
                     var wj = WeightsE[m];
                     sumInner += wj * fInner;
@@ -178,21 +191,20 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         public double FindB(int i)
         {
             var sum = 0.0;
-            for (int k = 0; k < X.Length; k++)
+            for (int k = 0; k < Nroots; k++)
             {
                 var wi = WeightsE[k];
-                var f = F(X[k]);
-                var h = Hermit(X[k], i);
+                var f = F(Xroots[k]);
+                var h = Hermite(Xroots[k], i);
                 sum += wi * f * h;
             }
             return sum;
         }
 
-        public double Hermit(double x, int n = 10)
+        public double Hermite(double x, int n = 10)
         {
             var sum = 0.0;
-            var add = n / 2 == 0 ? 0 : 1;
-            for (int i = 0; i <= n / 2 + add; i++)
+            for (int i = 0; i <= n / 2; i++)
             {
                 var factorials = Factorial(n) / (Factorial(i) * Factorial(n - 2 * i));
                 sum += Math.Pow(-1, i) * Math.Pow(2 * x, n - 2 * i) * factorials;
@@ -221,7 +233,7 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
             }
         }
 
-        public double[] Gauss(double[,] a, double[] y)
+        public double[] Gauss(double[,] a, double[] y, int N)
         {
             double[] x = new double[N];
             double max, temp;
@@ -244,6 +256,7 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
                 // Перестановка строк
                 if (max < eps)
                 {
+                    throw new Exception("find null");
                 }
                 for (int j = 0; j < N; j++)
                 {

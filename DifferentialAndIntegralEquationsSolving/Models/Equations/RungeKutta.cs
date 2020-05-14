@@ -35,5 +35,24 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
                 Y[i] = Y[i - 1] + (H / 6.0) * (k1 + 2 * k2 + 2 * k3 + k4);
             }
         }
+
+        public void Tolerance()
+        {
+            var Y_exact = new double[N];
+            for (int i = 0; i < N; i++)
+            {
+                Y_exact[i] = YExact(X[i]);
+            }
+            Diff = new double[N];
+            for (int j = 0; j < X.Length; j++)
+            {
+                Diff[j] = Math.Abs(Y[j] - Y_exact[j]);
+            }
+        }
+        public double YExact(double xi)
+        {
+            var retVal = -(Math.Sqrt(2) * Math.Tan(Math.Atan(3 * Math.Sqrt(2)) - 2 * Math.Sqrt(2) * xi + (3 * Math.Sqrt(2)) / 5.0)) / 2.0;
+            return retVal;
+        }
     }
 }

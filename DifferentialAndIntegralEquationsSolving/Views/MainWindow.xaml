@@ -45,7 +45,7 @@
                         <vs:CollocationView x:Name="collocView" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="GalerTab" Width="100" Height="50" Header="Galerkin" FontSize="15">
+                <TabItem x:Name="GalerTab" Width="100" Height="50" Header="Galerkin" FontSize="15" IsSelected="True">
                     <Grid>
                         <vs:GalerkinView x:Name="galerView" Grid.Column="1"/>
                     </Grid>
@@ -53,6 +53,11 @@
                 <TabItem x:Name="RegGalerTab" Width="100" Height="50" Header="Tikhonov regulariztion" FontSize="15">
                     <Grid>
                         <vs:TikhonovRegularizationGalerkinView x:Name="regView" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="DegenTab" Width="100" Height="50" Header="Degenerate Kernel" FontSize="15">
+                    <Grid>
+                        <vs:DegenerateKernelView x:Name="degView" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
             </TabControl>

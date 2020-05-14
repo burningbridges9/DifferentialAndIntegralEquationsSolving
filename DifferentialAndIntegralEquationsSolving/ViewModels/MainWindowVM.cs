@@ -23,6 +23,7 @@ namespace DifferentialAndIntegralEquationsSolving.ViewModels
         public EulerSolverVM EulerSolverVM { get; set; }
         public RungeKuttaSolverVM RungeKuttaSolverVM { get; set; }
         public TikhonovRegularizationGalerkinVM TikhonovRegularizationGalerkinVM { get; set; }
+        public DegenerateKernelVM DegenerateKernelVM { get; set; }
         public MainWindowVM()
         {
             EulerVM = EulerView.eulerVM;
@@ -31,6 +32,7 @@ namespace DifferentialAndIntegralEquationsSolving.ViewModels
             CollocationVM = CollocationView.CollocationVM;
             GalerkinVM = GalerkinView.GalerkinVM;
             TikhonovRegularizationGalerkinVM = TikhonovRegularizationGalerkinView.TikhonovRegularizationGalerkinVM;
+            DegenerateKernelVM = DegenerateKernelView.DegenerateKernelVM;
             //RungeKuttaSolverVM = new RungeKuttaSolverVM();
             // EulerSolverVM = new EulerSolverVM();
             PlotViewModel = new PlotViewModel();

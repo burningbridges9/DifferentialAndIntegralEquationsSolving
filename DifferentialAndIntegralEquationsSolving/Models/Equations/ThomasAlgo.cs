@@ -45,22 +45,28 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
             B[0] = B1;
             B[N - 1] = Bn;
 
-            A[0] = A[N - 1] = C[0] = C[N - 1] = 0;
+            A[0] = C[N - 1] = 0;
 
             D[0] = Y0;
             D[N-1] = YN;
 
-            S[0] = -C[0] / B[0];
-            T[0] = D[0] / B[0];
-
-            for (int i = 1; i < N - 1; i++)
+            for (int i = 1; i < N; i++)
             {
                 A[i] = Ai;
-                B[i] = Bi;
+            }
+            for (int i = 0; i < N; i++)
+            {
                 C[i] = Ci;
+            }
+            for (int i = 1; i < N - 1; i++)
+            {
+                B[i] = Bi;
                 var xi = X[i];
                 D[i] = G(xi);
             }
+
+            S[0] = 0;
+            T[0] = 1;
 
             for (int i = 1; i < N; i++)
             {
@@ -71,8 +77,7 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
 
         public override void Solve()
         {
-            Y[N - 1] = T[N - 1];
-            for (int i = N - 2; i >= 0; i--)
+            for (int i = N - 2; i > 0; i--)
             {
                 Y[i] = S[i] * Y[i + 1] + T[i];
             }
@@ -81,6 +86,25 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
         {
             var val = xi + 9;
             return val;
+        }
+
+        public void Tolerance()
+        {
+            var Y_exact = new double[N];
+            for (int i = 0; i < N; i++)
+            {
+                Y_exact[i] = YExact(X[i]);
+            }
+            Diff = new double[N];
+            for (int j = 0; j < X.Length; j++)
+            {
+                Diff[j] = Math.Abs(Y[j] - Y_exact[j]);
+            }
+        }
+        public double YExact(double xi)
+        {
+            var retVal = (35.0 * xi) / 16.0 + (57.0 * Math.Exp(8.0 - 4.0 * xi)) / (16.0 * (Math.Exp(4) - 1.0)) - (277.0 * Math.Exp(4) - 49.0) / (64.0 * (Math.Exp(4) - 1.0)) + (xi *xi) / 8.0 - 35.0 / 64.0;
+            return retVal;
         }
     }
 }

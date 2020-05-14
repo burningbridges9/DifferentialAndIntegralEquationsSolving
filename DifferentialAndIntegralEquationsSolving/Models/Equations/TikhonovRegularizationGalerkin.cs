@@ -8,77 +8,88 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         public double[,] C { get; set; }
         public double[] B { get; set; }
 
-        public double[] Diff { get; set; }
+        public double[] A { get; set; }
+        public double[] Xroots { get; set; }
+        public int Nroots { get; set; } = 10;
+        public double Alpha { get; set; } = 1;
 
         public double[] WeightsE { get; set; }
 
         public TikhonovRegularizationGalerkin()
         {
-            N = 10;
-            C = new double[N, N];
+            X0 = 0.0;
+            X1 = 10.0;
+            N = 30;
+            C = new double[Nroots, Nroots];
             SetupX();
-            B = new double[N];
+            B = new double[Nroots];
         }
 
         private void FillB()
         {
-            for (int i = 0; i < X.Length; i++)
+            for (int i = 0; i < Nroots; i++)
             {
-                B[i] = FindB(i);
+                B[i] = FindB(i) / Alpha;
             }
         }
 
         protected override void SetupX()
         {
             X = new double[N];
-            X[0]= 0.137793470540;
-            X[1]= 0.729454549503;
-            X[2]= 1.808342901740;
-            X[3]= 3.401433697855;
-            X[4]= 5.552496140064;
-            X[5]= 8.330152746764;
-            X[6]= 11.843785837900;
-            X[7]= 16.279257831378;
-            X[8]= 21.996585811981;
-            X[9]= 29.920697012274;
+            H = (X1 - X0) / (N - 1);
+            for (int i = 0; i < N; i++)
+            {
+                X[i] = X0 + i * H;
+            }
+            Xroots = new double[Nroots];
+            Xroots[0]= 0.137793470540;
+            Xroots[1]= 0.729454549503;
+            Xroots[2]= 1.808342901740;
+            Xroots[3]= 3.401433697855;
+            Xroots[4]= 5.552496140064;
+            Xroots[5]= 8.330152746764;
+            Xroots[6]= 11.843785837900;
+            Xroots[7]= 16.279257831378;
+            Xroots[8]= 21.996585811981;
+            Xroots[9]= 29.920697012274;
 
 
-            WeightsE = new double[N];
-            WeightsE[0] = 0.308441115765;
-            WeightsE[1] = 0.401119929155;
-            WeightsE[2] = 0.218068287612;
-            WeightsE[3] = 0.00620874560987;
-            WeightsE[4] = 0.000950151697518;
-            WeightsE[5] = 0.0000753008388588;
-            WeightsE[6] = 0.000002822592334960;
-            WeightsE[7] = 0.0000000424931398496;
-            WeightsE[8] = 0.000000000183956482398;
-            WeightsE[9] = 0.0000000000000991182721961;
+            WeightsE = new double[Nroots];
+            WeightsE[0] = 0.354009738607;// 0.308441115765;
+            WeightsE[1] = 0.831902301044;// 0.401119929155;
+            WeightsE[2] = 1.33028856175;// 0.218068287612;
+            WeightsE[3] = 1.86306390311;// 0.00620874560987;
+            WeightsE[4] = 2.45025555808;// 0.000950151697518;
+            WeightsE[5] = 3.12276415514;// 0.0000753008388588;
+            WeightsE[6] = 3.93415269556;// 0.000002822592334960;
+            WeightsE[7] = 4.99241487219;// 0.0000000424931398496;
+            WeightsE[8] = 6.57220248513;// 0.000000000183956482398;
+            WeightsE[9] = 9.78469584037;// 0.0000000000000991182721961;
         }
 
         public override void Solve()
         {
             FillMatrix();
             FillB();
-            var A = Gauss(C, B);
+            A = new double[Xroots.Length];
+            A = Gauss(C, B, Nroots);
             Y = new double[N];
-            var alpha = 1.0;
             for (int i = 0; i < N; i++)
             {
                 var sum = 0.0;
-                for (int j = 0; j < N; j++)
+                for (int j = 0; j < Nroots; j++)
                 {
                     sum += A[j] * Laguerre(X[i], j);
                 }
-                Y[i] += sum/alpha;
+                Y[i] += sum;
             }
         }
 
         private void FillMatrix()
         {
-            for (int i = 0; i < X.Length; i++)
+            for (int i = 0; i < Nroots; i++)
             {
-                for (int j = 0; j < X.Length; j++)
+                for (int j = 0; j < Nroots; j++)
                 {
                     C[i, j] = FindC(i, j);
                 }
@@ -96,10 +107,10 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         public double WaveF(double x)
         {
             var sum = 0.0;
-            for (int i = 0; i < X.Length; i++)
+            for (int i = 0; i < Nroots; i++)
             {
                 var wi = WeightsE[i];
-                var si = X[i];
+                var si = Xroots[i];
 
                 var k = K(si, x);
                 var f = F(si);
@@ -116,10 +127,10 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         public double WaveK(double x, double t)
         {
             var sum = 0.0;
-            for (int i = 0; i < X.Length; i++)
+            for (int i = 0; i < Nroots; i++)
             {
                 var wi = WeightsE[i];
-                var si = X[i];
+                var si = Xroots[i];
 
                 var k1 = K(si, x);
                 var k2 = K(si, t);
@@ -168,10 +179,15 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         public double IntegrateForCheck(double xj)
         {
             var sum = 0.0;
-            for (int i = 0; i < X.Length; i++)
+            for (int i = 0; i < Nroots; i++)
             {
+                var yi = 0.0;
+                for (int j = 0; j < Nroots; j++)
+                {
+                    yi += A[j] * Laguerre(Xroots[i], j);
+                }
                 var wi = WeightsE[i];
-                var f = K(xj, X[i]) * Y[i];
+                var f = WaveK(xj, Xroots[i]) * yi;
                 sum += wi * f;
             }
             return sum;
@@ -182,7 +198,10 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
             Diff = new double[N];
             for (int j = 0; j < X.Length; j++)
             {
-                Diff[j] = Math.Abs(Y[j] - IntegrateForCheck(X[j]) - B[j]);
+                var integral = IntegrateForCheck(X[j]);
+                var right = WaveF(X[j]);
+                var solveXalpha = Alpha * Y[j];
+                Diff[j] = Math.Abs(solveXalpha - integral - right);
             }
         }
         #endregion
@@ -190,16 +209,16 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         #region Find C matrix
         public double FindC(int i, int j)
         {
-            var c_ij = FirstC(i, i) - SecondC(i, j);
+            var c_ij = FirstC(i, i) - SecondC(i, j) / Alpha;
             return c_ij;
         }
 
         public double FirstC(int i, int j)
         {
             var sum = 0.0;
-            for (int k = 0; k < X.Length; k++)
+            for (int k = 0; k < Nroots; k++)
             {
-                var xk = X[k];
+                var xk = Xroots[k];
                 var wk = WeightsE[k];
                 var h1 = Laguerre(xk, i);
                 var h2 = Laguerre(xk, j);
@@ -213,16 +232,16 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         public double SecondC(int i, int j)
         {
             var sumOutter = 0.0;
-            for (int n = 0; n < X.Length; n++)
+            for (int n = 0; n < Nroots; n++)
             {
-                var xn = X[n];
+                var xn = Xroots[n];
                 var wn = WeightsE[n];
 
                 var h1 = Laguerre(xn, i);
                 var sumInner = 0.0;
-                for (int m = 0; m < X.Length; m++)
+                for (int m = 0; m < Nroots; m++)
                 {
-                    var xm = X[m];
+                    var xm = Xroots[m];
                     var wm = WeightsE[m];
 
                     var k = WaveK(xn, xm);
@@ -239,23 +258,23 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
         public double FindB(int i)
         {
             var sum = 0.0;
-            for (int k = 0; k < X.Length; k++)
+            for (int k = 0; k < Nroots; k++)
             {
                 var wi = WeightsE[k];
-                var f = WaveF(X[k]);
-                var h = Laguerre(X[k], i);
+                var f = WaveF(Xroots[k]);
+                var h = Laguerre(Xroots[k], i);
                 sum += wi * f * h;
             }
-            return sum;
+            return sum / Alpha;
         }
 
         #region Gauss
-        public double[] Gauss(double[,] a, double[] y)
+        public double[] Gauss(double[,] a, double[] y, int N)
         {
             double[] x = new double[N];
             double max, temp;
             int k, index;
-            const double eps = 0.00001;  // точность
+            const double eps = 0.000000000000001;  // точность
             k = 0;
             while (k < N)
             {
@@ -273,6 +292,7 @@ namespace DifferentialAndIntegralEquationsSolving.Models.Equations
                 // Перестановка строк
                 if (max < eps)
                 {
+                    throw new Exception("find null");
                 }
                 for (int j = 0; j < N; j++)
                 {

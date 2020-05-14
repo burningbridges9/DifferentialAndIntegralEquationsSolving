@@ -67,10 +67,12 @@
     <Compile Include="MatlabSolvers\MatlabSolver.cs" />
     <Compile Include="MatlabSolvers\RungeKuttaSolver.cs" />
     <Compile Include="Models\Equations\Collocation.cs" />
+    <Compile Include="Models\Equations\DegenerateKernel.cs" />
     <Compile Include="Models\Equations\GalerkinFollowup.cs" />
     <Compile Include="Models\Equations\Galerkin.cs" />
     <Compile Include="Models\Equations\RungeKutta.cs" />
     <Compile Include="Models\Equations\ThomasAlgo.cs" />
+    <Compile Include="ViewModels\Equations\DegenerateKernelVM.cs" />
     <Compile Include="ViewModels\Equations\TikhonovRegularizationGalerkinVM.cs" />
     <Compile Include="ViewModels\Equations\GalerkinVM.cs" />
     <Compile Include="ViewModels\Equations\CollocationVM.cs" />
@@ -82,6 +84,9 @@
     <Compile Include="ViewModels\MatlabSolvers\EulerSolverVM.cs" />
     <Compile Include="ViewModels\MatlabSolvers\RungeKuttaSolverVM.cs" />
     <Compile Include="ViewModels\PlotViewModel.cs" />
+    <Compile Include="Views\Equations\DegenerateKernelView.xaml.cs">
+      <DependentUpon>DegenerateKernelView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Equations\TikhonovRegularizationGalerkinView.xaml.cs">
       <DependentUpon>TikhonovRegularizationGalerkinView.xaml</DependentUpon>
     </Compile>
@@ -100,6 +105,10 @@
     <Compile Include="Views\Equations\EulerView.xaml.cs">
       <DependentUpon>EulerView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Equations\DegenerateKernelView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Equations\TikhonovRegularizationGalerkinView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

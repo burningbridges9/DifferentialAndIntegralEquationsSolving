@@ -68,6 +68,8 @@ namespace DifferentialAndIntegralEquationsSolving.Equations
         public double[] X { get; set; }
         public double[] Y { get; set; }
 
+        public double[] Diff { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {

@@ -1,4 +1,5 @@
 ﻿using DifferentialAndIntegralEquationsSolving.Equations;
+using DifferentialAndIntegralEquationsSolving.Models.Equations;
 using DifferentialAndIntegralEquationsSolving.ViewModels;
 using DifferentialAndIntegralEquationsSolving.Views;
 using System;
@@ -148,6 +149,16 @@ namespace DifferentialAndIntegralEquationsSolving
                 MainWindowVM.CollocationVM.Collocation.Tolerance();
                 MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.CollocationVM.Collocation.X, MainWindowVM.CollocationVM.Collocation.Diff);
             }
+            else if ((tabControl.SelectedContent as Grid).Children.OfType<ThomasAlgoView>().FirstOrDefault() != null)
+            {
+                MainWindowVM.ThomasAlgoVM.ThomasAlgo.Tolerance();
+                MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.ThomasAlgoVM.ThomasAlgo.X, MainWindowVM.ThomasAlgoVM.ThomasAlgo.Diff);
+            }
+            else if ((tabControl.SelectedContent as Grid).Children.OfType<RungeKuttaView>().FirstOrDefault() != null)
+            {
+                MainWindowVM.RungeKuttaVM.RungeKutta.Tolerance();
+                MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.RungeKuttaVM.RungeKutta.X, MainWindowVM.RungeKuttaVM.RungeKutta.Diff);
+            }
             else if ((tabControl.SelectedContent as Grid).Children.OfType<GalerkinView>().FirstOrDefault() != null)
             {
                 if ((bool)(tabControl.SelectedContent as Grid).Children.OfType<GalerkinView>().FirstOrDefault().SolveType.IsChecked)
@@ -165,6 +176,11 @@ namespace DifferentialAndIntegralEquationsSolving
             {
                 MainWindowVM.TikhonovRegularizationGalerkinVM.TikhonovRegularizationGalerkin.Tolerance();
                 MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.TikhonovRegularizationGalerkinVM.TikhonovRegularizationGalerkin.X, MainWindowVM.TikhonovRegularizationGalerkinVM.TikhonovRegularizationGalerkin.Diff);
+            }
+            else if ((tabControl.SelectedContent as Grid).Children.OfType<DegenerateKernelView>().FirstOrDefault() != null)
+            {
+                MainWindowVM.DegenerateKernelVM.DegenerateKernel.Tolerance();
+                MainWindowVM.PlotViewModel.PlotXY(MainWindowVM.DegenerateKernelVM.DegenerateKernel.X, MainWindowVM.DegenerateKernelVM.DegenerateKernel.Diff);
             }
         }
     }
